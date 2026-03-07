@@ -1,0 +1,76 @@
+/* Tailwind base, components, utilities */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+@layer utilities {
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+/* Custom Variables */
+:root {
+  --color-cyan-dark: #083344;
+  --color-cyan-light: #06b6d4;
+  --color-teal-dark: #115e59;
+  --color-teal-light: #14b8a6;
+  --color-bg-dark: #020617;
+  --color-bg-light: #0f172a;
+  --color-glow-cyan: #155e75;
+  --color-glow-green: #065f46;
+  --color-glow-orange: #9a3412;
+  --color-glow-pink: #9d174d;
+  --background: 222.2 84% 4.9%;
+  --foreground: 210 40% 98%;
+  --radius: 0.5rem;
+}
+
+/* Custom Classes */
+body {
+  background-color: var(--color-bg-dark);
+  color: white;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Your custom fonts */
+.font-sans { font-family: 'Inter', sans-serif; }
+.font-serif { font-family: 'Playfair Display', serif; }
+
+/* Gradients, 3D effects, shadows, animations */
+.text-gradient {
+  background: linear-gradient(125deg, var(--color-cyan-light), #ffffff 60%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: animated-gradient 6s ease infinite;
+  background-size: 200% 200%;
+}
+
+.star-perspective { perspective: 1000px; }
+.star-container { transform-style: preserve-3d; }
+.star-layer { clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); }
+.glimmer-light { animation: light-burst 3s ease-in-out forwards; }
+
+.hover\:shadow-cyan-glow:hover { box-shadow: 0 0 35px 10px rgba(6, 182, 212, 0.6); }
+.hover\:shadow-teal-glow:hover { box-shadow: 0 0 35px 10px rgba(20, 184, 166, 0.6); }
+
+/* Keyframes (all your existing ones stay) */
+@keyframes spin-perpetual { from { transform: rotateY(0deg) rotateX(10deg) rotateZ(0deg); } to { transform: rotateY(360deg) rotateX(10deg) rotateZ(360deg); } }
+.animate-spin-perpetual { animation: spin-perpetual 25s infinite linear; }
+
+@keyframes light-burst { 0% { opacity: 0; transform: scale(0.2); } 50% { opacity: 1; transform: scale(1.8); } 100% { opacity: 0; transform: scale(0.2); } }
+
+@keyframes animated-gradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+
+@keyframes pulse { 0%,100%{filter:drop-shadow(0 0 10px rgba(6,182,212,0.6));} 50%{filter:drop-shadow(0 0 25px rgba(6,182,212,0.9));} }
+.star-pulsing { animation: pulse 4s ease-in-out infinite; }
+
+/* Add all remaining animations and scrollbars as in your original file */
