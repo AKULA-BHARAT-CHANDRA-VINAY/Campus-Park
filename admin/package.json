@@ -2,7 +2,7 @@
   "name": "campus-park-admin",
   "version": "0.1.0",
   "private": true,
-  "homepage": "/admin",
+  "homepage": ".",
   "dependencies": {
     "@heroicons/react": "^1.0.6",
     "axios": "^1.13.5",
