@@ -1,5 +1,6 @@
 import axios from "axios";
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+const rawBaseURL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+const API_BASE_URL = rawBaseURL.endsWith('/api') ? rawBaseURL : `${rawBaseURL}/api`;
 
 export interface ApiResponse<T> {
   success: boolean;
