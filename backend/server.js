@@ -21,7 +21,7 @@ const port = process.env.PORT || 5000;
 //middlewares
 app.use(
   cors({
-    origin: ["http://localhost:3000", "https://campuspark-gate-scanning.netlify.app"],
+    origin: ["http://localhost:3000", "https://campuspark-gate-scanning.netlify.app", "https://campus-park.vercel.app", "https://campus-park-admin.vercel.app"],
     credentials: true
   })
 );
@@ -71,7 +71,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: ["http://localhost:3000", "https://campuspark-gate-scanning.netlify.app"],
+    origin: ["http://localhost:3000", "https://campuspark-gate-scanning.netlify.app", "https://campus-park.vercel.app", "https://campus-park-admin.vercel.app"],
     methods: ["GET", "POST"],
     credentials: true
   }
