@@ -43,7 +43,7 @@ const ManualBooking = () => {
      1️⃣ SOCKET CONNECTION
   ====================== */
   useEffect(() => {
-    const newSocket = io("http://localhost:5000");
+    const newSocket = io(import.meta.env.VITE_SOCKET_URL || "http://localhost:5000");
     setSocket(newSocket);
 
     newSocket.on("slotUpdated", ({ slotId, status }) => {

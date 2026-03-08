@@ -17,7 +17,7 @@ const SlotOptimizer: React.FC = () => {
       setLoading(true);
 
       const res = await axios.post(
-        "http://localhost:5000/api/ml/predict",
+        `${process.env.REACT_APP_API_URL || 'http://localhost:5000/api'}/ml/predict`,
         {
           vehicle_type: vehicleType,
           department: department,

@@ -75,7 +75,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onBack, onExitScanner, onScannerS
      SOCKET
   ====================== */
   useEffect(() => {
-    const socket = io("http://localhost:5000");
+    const socket = io(import.meta.env.VITE_SOCKET_URL || "http://localhost:5000");
 
     socket.on("slotUpdated", ({ slotId, status }) => {
       setSlots(prev =>

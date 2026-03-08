@@ -13,7 +13,7 @@ const RebalanceModel: React.FC = () => {
       setError("");
 
       const res = await axios.get(
-        "http://localhost:5000/api/ml/rebalance"
+        `${process.env.REACT_APP_API_URL || 'http://localhost:5000/api'}/ml/rebalance`
       );
 
       setResult(res.data);

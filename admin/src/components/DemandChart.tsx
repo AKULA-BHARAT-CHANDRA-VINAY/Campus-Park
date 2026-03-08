@@ -15,7 +15,7 @@ export default function DemandChart() {
   const [chartData, setChartData] = useState<any>(null);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/ml/rebalance")
+    axios.get(`${process.env.REACT_APP_API_URL || 'http://localhost:5000/api'}/ml/rebalance`)
       .then(res => {
 
         // Adjust this based on your actual ML output structure

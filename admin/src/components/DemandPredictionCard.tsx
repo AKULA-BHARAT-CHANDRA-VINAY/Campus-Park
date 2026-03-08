@@ -6,7 +6,7 @@ const DemandPredictionCard: React.FC = () => {
   const [prediction, setPrediction] = useState<any>(null);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/ml/rebalance")
+    axios.get(`${process.env.REACT_APP_API_URL || 'http://localhost:5000/api'}/ml/rebalance`)
       .then(res => setPrediction(res.data))
       .catch(err => console.error(err));
   }, []);

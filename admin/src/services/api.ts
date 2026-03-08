@@ -72,17 +72,17 @@ export const api = {
   },
 
   getParkingAreas: async () => {
-    const response = await axios.get('/api/admin/areas');
+    const response = await axios.get(`${API_BASE_URL}/admin/areas`);
     return response.data;
   },
 
   updateParkingArea: async (id: string, payload: any) => {
-    const response = await axios.put(`/api/admin/update-area/${id}`, payload);
+    const response = await axios.put(`${API_BASE_URL}/admin/update-area/${id}`, payload);
     return response.data;
   },
 
   deleteParkingArea: async (id: string) => {
-    const response = await axios.delete(`/api/admin/delete-area/${id}`);
+    const response = await axios.delete(`${API_BASE_URL}/admin/delete-area/${id}`);
     return response.data;
   },
 
