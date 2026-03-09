@@ -63,17 +63,17 @@ app.use("/api/parking", parkingRoutes);
 //uploads
 app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
 
-// Serve Admin Panel (CRA builds to /build)
-app.use("/admin", express.static(path.join(process.cwd(), "../admin/build")));
-app.get("/admin/*", (req, res) => {
-  res.sendFile(path.join(process.cwd(), "../admin/build", "index.html"));
-});
+// // Serve Admin Panel (CRA builds to /build)
+// app.use("/admin", express.static(path.join(process.cwd(), "../admin/build")));
+// app.get("/admin/*", (req, res) => {
+//   res.sendFile(path.join(process.cwd(), "../admin/build", "index.html"));
+// });
 
-// Serve User App (Vite builds to /dist)
-app.use("/", express.static(path.join(process.cwd(), "../frontend/dist")));
-app.get("*", (req, res) => {
-  res.sendFile(path.join(process.cwd(), "../frontend/dist", "index.html"));
-});
+// // Serve User App (Vite builds to /dist)
+// app.use("/", express.static(path.join(process.cwd(), "../frontend/dist")));
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(process.cwd(), "../frontend/dist", "index.html"));
+// });
 
 // SOCKET.IO SETUP
 const server = http.createServer(app);
