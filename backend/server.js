@@ -16,7 +16,7 @@ import mlRoutes from "./routes/ml_Routes.js";
 import parkingRoutes from "./routes/parkingRoutes.js";
 
 const app = express();
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 5000;
 
 //middlewares
 const allowedOrigins = [
