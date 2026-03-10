@@ -16,7 +16,7 @@ import mlRoutes from "./routes/ml_Routes.js";
 import parkingRoutes from "./routes/parkingRoutes.js";
 
 const app = express();
-const port = process.env.PORT || 5000 || 8080;
+const port = process.env.PORT || 8080;
 
 //middlewares
 const allowedOrigins = [
@@ -29,17 +29,26 @@ const allowedOrigins = [
 app.use((req, res, next) => {
   const origin = req.headers.origin;
 
-  if (allowedOrigins.includes(origin)) {
+  // allow any vercel deployment
+  if (
+    allowedOrigins.includes(origin) ||
+    origin?.includes("vercel.app")
+  ) {
     res.setHeader("Access-Control-Allow-Origin", origin);
   }
 
   res.setHeader("Access-Control-Allow-Credentials", "true");
-  res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET,POST,PUT,DELETE,PATCH,OPTIONS"
+  );
 
-  // Handle preflight request
   if (req.method === "OPTIONS") {
-    return res.sendStatus(200);
+    return res.status(204).end();
   }
 
   next();
