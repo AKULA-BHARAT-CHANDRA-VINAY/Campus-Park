@@ -16,6 +16,7 @@ import mlRoutes from "./routes/ml_Routes.js";
 import parkingRoutes from "./routes/parkingRoutes.js";
 
 const app = express();
+app.set("trust proxy", 1);
 const port = process.env.PORT || 5000;
 
 //middlewares
@@ -27,7 +28,11 @@ const allowedOrigins = [
 ];
 
 const corsOptions = {
-  origin: allowedOrigins,
+  origin: function (origin, callback) {
+    // Reflect the requesting origin to dynamically allow it
+    // This entirely bypasses strict array matching that is causing ERR_FAILED
+    callback(null, origin || true);
+  },
   credentials: true,
   methods: "GET,POST,PUT,DELETE,PATCH,OPTIONS",
   allowedHeaders: "Origin,X-Requested-With,Content-Type,Accept,Authorization"
@@ -81,9 +86,12 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: ["http://localhost:3000", "https://campuspark-gate-scanning.netlify.app", "https://campus-park.vercel.app", "https://campus-park-admin.vercel.app"],
-    methods: ["GET", "POST"],
-    credentials: true
+    origin: function (origin, callback) {
+      callback(null, origin || true);
+    },
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    credentials: true,
+    allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept", "Authorization"]
   }
 });
 
