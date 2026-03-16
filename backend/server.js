@@ -27,19 +27,38 @@ const allowedOrigins = [
   "https://campuspark-gate-scanning.netlify.app"
 ];
 
-const corsOptions = {
-  origin: function (origin, callback) {
-    // Reflect the requesting origin to dynamically allow it
-    // This entirely bypasses strict array matching that is causing ERR_FAILED
-    callback(null, origin || true);
-  },
-  credentials: true,
-  methods: "GET,POST,PUT,DELETE,PATCH,OPTIONS",
-  allowedHeaders: "Origin,X-Requested-With,Content-Type,Accept,Authorization"
-};
+// BULLET-PROOF CUSTOM CORS MIDDLEWARE
+// The 'cors' package doesn't play nicely with Fastly/Railway edge caching for preflight requests in this setup.
+app.use((req, res, next) => {
+  const origin = req.headers.origin || req.headers.host;
+  
+  // Always reflect the origin if it exists, otherwise fallback to frontend url
+  if (origin) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+  } else {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+  }
+  
+  res.setHeader("Access-Control-Allow-Credentials", "true");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET,OPTIONS,PATCH,DELETE,POST,PUT"
+  );
+  
+  // Important for proxies/caching: tell them the response varies based on Origin
+  res.setHeader("Vary", "Origin, Access-Control-Request-Headers");
 
-app.use(cors(corsOptions));
-app.options('*', cors(corsOptions)); // Handle preflight for all routes
+  // Intercept OPTIONS preflight requests immediately
+  if (req.method === "OPTIONS") {
+    return res.status(200).end();
+  }
+
+  next();
+});
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
