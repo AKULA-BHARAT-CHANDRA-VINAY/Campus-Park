@@ -238,7 +238,7 @@ export const flashBooking = async (req, res) => {
 
     // 2. Create Booking (Reuse logic or direct create)
     // We'll mark slot RESERVED immediately
-    slot.status = "AVAILABLE";
+    slot.status = "RESERVED";
     await slot.save();
 
     const booking = await Booking.create({
@@ -255,7 +255,7 @@ export const flashBooking = async (req, res) => {
 
     io.emit("slotUpdated", {
       slotId: slot._id,
-      status: "AVAILABLE"
+      status: "booked"
     });
 
     const qrCode = await generateBookingQR(booking._id);

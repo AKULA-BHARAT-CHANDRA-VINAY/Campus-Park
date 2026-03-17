@@ -18,7 +18,7 @@ const bookingSchema = new mongoose.Schema({
   endTime: Date,
   status: {
     type: String,
-    enum: ["reserved", "active", "completed", "cancelled"],
+    enum: ["reserved", "active", "completed", "cancelled", "NO_SHOW"],
     default: "reserved"
   },
   qrCode: String,

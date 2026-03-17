@@ -209,10 +209,12 @@ export const adminLogin = async (req, res) => {
       });
     }
 
+    const token = mkToken({ id: admin._id, role: admin.role });
+
     return res.status(200).json({
       success: true,
       data: {
-        token: "admin-token-" + Date.now(), // temporary demo token
+        token,
         user: {
           id: admin._id,
           name: admin.fullname,

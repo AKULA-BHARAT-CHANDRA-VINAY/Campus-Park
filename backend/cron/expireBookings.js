@@ -7,7 +7,7 @@ export const expireBookings = async () => {
   const expired = await Booking.find({
     status: "reserved",
     checkedIn: false,
-    expiresAt: { $lt: now }
+    endTime: { $lt: now }
   });
 
   for (const booking of expired) {

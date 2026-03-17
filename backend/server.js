@@ -75,6 +75,11 @@ app.use((req, res, next) => {
 //db
 connectDB();
 
+// //root route
+// app.get("/", (req, res) => {
+//   res.json({ message: "Campus Park API is running 🚀", status: "OK" });
+// });
+
 //routes
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
