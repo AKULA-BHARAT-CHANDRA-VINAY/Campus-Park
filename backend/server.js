@@ -122,6 +122,12 @@ io.on("connection", (socket) => {
 export { io };
 
 // Start server
-server.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
-});
+// Keep listen for local dev only
+if (process.env.NODE_ENV !== 'production') {
+  server.listen(port, () => {
+    console.log(`Server running on http://localhost:${port}`);
+  });
+}
+
+// ✅ Export for Vercel
+export default app;
