@@ -31,14 +31,14 @@ const allowedOrigins = [
 // The 'cors' package doesn't play nicely with Fastly/Railway edge caching for preflight requests in this setup.
 app.use((req, res, next) => {
   const origin = req.headers.origin || req.headers.host;
-  
+
   // Always reflect the origin if it exists, otherwise fallback to frontend url
   if (origin) {
     res.setHeader("Access-Control-Allow-Origin", origin);
   } else {
     res.setHeader("Access-Control-Allow-Origin", "*");
   }
-  
+
   res.setHeader("Access-Control-Allow-Credentials", "true");
   res.setHeader(
     "Access-Control-Allow-Headers",
@@ -48,7 +48,7 @@ app.use((req, res, next) => {
     "Access-Control-Allow-Methods",
     "GET,OPTIONS,PATCH,DELETE,POST,PUT"
   );
-  
+
   // Important for proxies/caching: tell them the response varies based on Origin
   res.setHeader("Vary", "Origin, Access-Control-Request-Headers");
 
