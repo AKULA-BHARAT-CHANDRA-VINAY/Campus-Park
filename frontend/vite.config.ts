@@ -8,6 +8,7 @@ export default defineConfig(({ mode }) => {
       server: {
         port: 5173,
         host: '0.0.0.0',
+        allowedHosts: ['https://campus-park.up.railway.app']
       },
       plugins: [react()],
       define: {
