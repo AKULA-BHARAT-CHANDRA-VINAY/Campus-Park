@@ -22,8 +22,8 @@ const port = process.env.PORT || 5000;
 //middlewares
 const allowedOrigins = [
   "http://localhost:3000",
-  "https://campus-park.vercel.app",
-  "https://campus-park-admin.vercel.app",
+  "https://campus-park.up.railway.app",
+  "https://campus-park-admin.up.railway.app",
   "https://campuspark-gate-scanning.netlify.app"
 ];
 
